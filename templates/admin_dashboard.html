@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <p>
+			<img src = "../static/home.png"  width="15%"  height="5%" />
+  </p>
+  <h1>管理员控制台 <small></small></h1>
+  <a class="btn btn-success" href="/add_user"> 添加用户 </a>
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>姓名</th>
+      <th>邮箱</th>
+      <th>密码</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for i in users %}
+      <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.username}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.password}}</td>
+        <td><a href="edit_user/{{user.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td>
+          <form action="{{url_for('delete_user', id=user.id)}}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
